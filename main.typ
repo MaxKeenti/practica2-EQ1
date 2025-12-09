@@ -9,18 +9,18 @@
 #portada(
   "ACADEMIA",
   "MATERIA",
-  "PRÁCTICA 1",
+  "PRÁCTICA 2",
   "SECUENCIA Y PERIODO",
   "INTEGRANTES",
   "PROFESORA",
   "FECHA DE ENTREGA",
   "Redes",
   "Comunicación de Datos",
-  "ARMADO DE CABLES DE RED STRAIGHT THROUGH Y CROSSOVER",
+  "Comprobación Lógica de Cableado y Conectividad de una Red de Área Local",
   "5CV50 2026-1",
   integrantes,
   "Nancy Lorena Ortiz Castrejón",
-  "2 de diciembre de 2025",
+  "09 de diciembre de 2025",
 )
 
 #set text(
@@ -47,209 +47,120 @@
 #v(1cm)
 
 #set align(center)
-#title("ARMADO DE CABLES DE RED STRAIGHT THROUGH Y CROSSOVER")
+#title("Comprobación Lógica de Cableado y Conectividad de una Red de Área Local")
 #set align(left)
 
-= Calificación y observaciones
-#v(3cm)
+= Comandos de Red
 
-= Objetivo
-Armar un cable o directo (Straight Through) UTP CAT. 5e y un cable cruzado (crossover) UTP CAT. 5e según la norma ANSI/EIA/TIA 568A y 568B.
+== PING
+El comando ping (Packet Internet Groper) permite comprobar si existe conectividad entre tu computadora y otro dispositivo dentro de la red o en Internet.
 
-= Consideraciones Teóricas
-== Investigar la configuración ANSI/EIA/TIA 568A y 568B.
+Funciona enviando pequeños paquetes llamados ICMP Echo Request, y si el destino está disponible, este responde con ICMP Echo Reply.
 
-Las normas T568A y T568B son estándares de cableado para conectores RJ45 @wikipedia_ansi. La diferencia principal radica en la posición de los pares naranja y verde @flukenetworks_568.
+Sirve para:
+- Verificar si un host (PC, router, servidor) está encendido y accesible.
+- Identificar fallas en la red (si no hay respuesta, puede haber un problema físico o lógico).
+- Medir el tiempo de ida y vuelta de los paquetes (latencia), lo cual ayuda a detectar lentitud y saber si el problema es local (LAN) o externo (Internet).
 
-=== T568A:
-- Pin 1: Blanco/Verde
-- Pin 2: _`Verde`_
-- Pin 3: Blanco/Naranja
-- Pin 4: Azul
-- Pin 5: Blanco/Azul
-- Pin 6: _`Naranja`_
-- Pin 7: Blanco/Café
-- Pin 8: Café
+=== Ejemplos:
+- `ping -t`: hace ping continuo.
+- `ping -4`: fuerza uso de IPv4.
+- `ping -n 10`: envía un número específico de paquetes.
 
-=== T568B:
-- Pin 1: Blanco/Naranja
-- Pin 2: _`Naranja`_
-- Pin 3: Blanco/Verde
-- Pin 4: Azul
-- Pin 5: Blanco/Azul
-- Pin 6: _`Verde`_
-- Pin 7: Blanco/Café
-- Pin 8: Café
+== IPCONFIG
+El comando ipconfig muestra la información de configuración de red de la computadora en Windows y permite conocer direcciones IP asignadas, máscaras de subred, gateway, DNS, tipo de adaptador, entre otros datos fundamentales.
 
-== Explique la configuración de ambas normas, describiendo la función de cada color de los pares trenzados.
+Sirve para:
+- Poder ver la IP actual del equipo.
+- Identificar el adaptador que está en uso (Ethernet o WiFi).
+- Saber si la PC recibió una IP del router mediante DHCP.
+- Diagnosticar problemas cuando la IP comienza con 169.254.x.x (red APIPA) y renovar o liberar la IP cuando hay conflictos de direccionamiento.
 
-En redes Ethernet 10/100Base-T, solo se utilizan dos pares (4 hilos) para la comunicación: uno para transmitir (Tx) y otro para recibir (Rx) @techtarget.
+=== Ejemplos
+- `ipconfig`: muestra IP básica.
+- `ipconfig /all`: muestra toda la información detallada (DNS, MAC, DHCP).
+- `ipconfig /reléase`: libera la IP actual.
+- `ipconfig /renew`: solicita una nueva IP al servidor DHCP.
+- `ipconfig /flushdns`: limpia la caché DNS.
 
-- *Pines 1 y 2 (Tx):* Se utilizan para la transmisión de datos.
-  - En T568A, corresponde al par Verde.
-  - En T568B, corresponde al par Naranja.
-- *Pines 3 y 6 (Rx):* Se utilizan para la recepción de datos.
-  - En T568A, corresponde al par Naranja.
-  - En T568B, corresponde al par Verde.
-- *Pines 4, 5, 7 y 8:* No se utilizan en 10/100Base-T, pero son necesarios para Gigabit Ethernet (1000Base-T) y PoE (Power over Ethernet), donde se usan los cuatro pares.
+== TRACERT
+El comando tracert (Trace Route) permite rastrear la ruta que siguen los paquetes desde tu computadora hasta un destino.
 
-== Explique la razón por la cual los pares se encuentran cruzados en un cable crossover.
+Muestra todos los routers o saltos por los que pasan los paquetes antes de llegar al final.
 
-Un cable cruzado (Crossover) se utiliza para conectar dispositivos del mismo tipo (ej. PC a PC, Switch a Switch sin Auto-MDIX). Esto es necesario porque ambos dispositivos intentan transmitir por los pines 1 y 2, y recibir por los pines 3 y 6. Si se usara un cable directo, la transmisión de uno chocaría con la transmisión del otro (Tx con Tx) @techtarget.
+Puede:
+- Identificar dónde se rompe la comunicación en caso de fallas.
+- Medir el tiempo de respuesta de cada salto.
+- Analizar la ruta que los datos siguen dentro de una red grande o hacia Internet.
+- Saber si un problema está dentro de la red local o en la red del proveedor de Internet.
 
-El cruce conecta los pines de transmisión (Tx) de un extremo con los pines de recepción (Rx) del otro extremo:
-- Pin 1 (Tx) <-> Pin 3 (Rx)
-- Pin 2 (Tx) <-> Pin 6 (Rx)
+Funciona de la siguiente forma:
 
-Esto se logra configurando un extremo con la norma T568A y el otro con la norma T568B.
+tracert envía paquetes con un valor llamado TTL (Time to Live):
+- TTL = 1 - solo llega al primer router.
+- TTL = 2 - llega al segundo, y así sucesivamente.
 
-== ¿Cuantas categorías de cable UTP existen? Explique las aplicaciones de cada categoría.
+Cada router responde indicando que pasó por ahí. Eso permite ver toda la ruta.
 
-Existen varias categorías, siendo las más comunes actualmente @telco_data_categories:
+== NETSTAT
+El comando netstat (Network Statistics) muestra todas las conexiones de red activas, los puertos en uso y estadísticas del protocolo TCP/IP.
 
-- *Cat 5e (Enhanced):* Soporta velocidades de hasta 1 Gbps (Gigabit Ethernet) a 100 MHz. Es el estándar mínimo para redes domésticas y de oficina actuales.
-- *Cat 6:* Soporta hasta 1 Gbps a 100 metros y 10 Gbps a distancias cortas (hasta 55 metros). Frecuencia de 250 MHz. Ideal para oficinas con mayor tráfico de datos.
-- *Cat 6a (Augmented):* Soporta 10 Gbps a 100 metros. Frecuencia de 500 MHz. Tiene mejor aislamiento contra diafonía (crosstalk). Usado en centros de datos y redes corporativas de alto rendimiento.
-- *Cat 7:* Soporta 10 Gbps a 100 metros con frecuencias de hasta 600 MHz. Cada par está blindado individualmente. Usado en aplicaciones industriales y centros de datos con alta interferencia.
-- *Cat 8:* Soporta 25 Gbps o 40 Gbps a distancias cortas (hasta 30 metros). Frecuencia de hasta 2000 MHz. Diseñado principalmente para enlaces entre servidores en centros de datos.
+Ayuda a:
+- Poder ver las conexiones TCP/UDP abiertas en la computadora.
+- Identificar puertos utilizados por aplicaciones (útil en seguridad y diagnóstico).
+- Revisar qué programas están comunicándose a Internet.
+- Detectar conexiones sospechosas o actividad anormal.
+- Consultar el estado de cada conexión (LISTENING, ESTABLISHED, TIME_WAIT, etc.).
 
-= Desarrollo de la práctica
+=== Ejemplos
+- `netstat`: muestra conexiones activas.
+- `netstat -n`: muestra IPs y puertos en formato numérico.
+- `netstat -a`: muestra todos los puertos en escucha.
+- `netstat -b`: muestra qué programa usa qué conexión (requiere permisos).
+- `netstat -r`:  muestra la tabla de enrutamiento.
 
-== Configuración del cableado T568-A y T568-B
+= Conexión Punto a Punto con Cable Crossover
 
-=== Material a utilizar
-- 2 cables UTP CAT 5e o CAT 6 de 1.0 mts.
-- 6 conectores RJ45 para el tipo y categoría de cable que eligió.
-- Pela cables de red
-- Tester de continuidad para RJ45
-- Crimpadora (ponchadora) para cable RJ45
+¿Cómo conectar 2 computadoras punto a punto con un cable crossover?
 
-== Pasos
-=== Corte del cable
-Para construir un cable de conexión directa de acuerdo a la configuración T568-A, corte un trozo de cable de par trenzado no blindado Cat. 5e o superior de una longitud de 1.0 metros.
+Se utiliza un cable crossover porque las computadoras transmiten datos en un par y reciben en otro. Al cruzarlos, las señales de una PC llegan al puerto correcto de la otra PC.
+
+En cables crossover:
+- El par que transmite en una PC llega al par receptor de la otra.
+- Esto permite la comunicación directa.
+
 #figure(
-  image("media/foto1.jpg", width: 25%),
-  caption: [
-    Corte del cable
-  ],
+  image("media/diagrama1.jpg", width: 50%),
+  caption: [Diagrama explicativo],
 )
 
-=== Retiro de protección
-Retire 3 cm. de la protección plástica de uno de los extremos del cable UTP.
+== 1. Conecta el cable crossover
+Cada extremo va conectado al adaptador de red Ethernet de cada computadora.
+
 #figure(
-  image("media/foto2.jpg", width: 25%),
-  caption: [
-    Retiro de protección
-  ],
+  image("media/foto5.jpg", width: 40%),
+  caption: [Conexión del cable],
 )
 
-=== Ordenamiento de pares
-Sostenga el cable, destrence y ordene los pares de hilos de modo que cumplan con el diagrama de color del cableado T568-B.
+== 2. Asigna direcciones IP en la misma red
+Como no hay router, cada PC debe tener una IP manual.
+
+Ejemplo:
+
+*PC 1*
+- IP: 192.168.10.1
+- Máscara: 255.255.255.0
+
+*PC 2*
+- IP: 192.168.10.2
+- Máscara: 255.255.255.0
+
+No se asigna puerta de enlace porque no hay salida a internet.
+
+== 3. Verifica conectividad
+En cada PC ejecuta con el comando ping.
+
 #figure(
-  image("media/diagrama1.jpg", width: 25%),
-  caption: [
-    Diagrama T568-B
-  ],
+  image("media/foto10.jpg", width: 40%),
+  caption: [Verificación con Ping],
 )
-#figure(
-  image("media/foto3.jpg", width: 25%),
-  caption: [
-    Ordenamiento de pares
-  ],
-)
-
-=== Corte de hilos
-Aplane, enderece y haga coincidir los hilos, luego recórtelos en línea recta alrededor de 1.20 cm. a 1.90 cm. del borde de la protección plástica del UTP.
-#figure(
-  image("media/foto4.jpg", width: 25%),
-  caption: [
-    Corte de hilos
-  ],
-)
-
-=== Colocación del conector
-Coloque un conector RJ-45 en el extremo del cable, con la lengüeta hacia abajo.
-#figure(
-  image("media/foto5.jpg", width: 25%),
-  caption: [
-    Colocación del conector
-  ],
-)
-
-=== Verificación visual
-Empuje suavemente los hilos dentro del conector hasta que pueda visualizar las puntas de cobre de éstos a través del extremo superior del conector. Asegúrese de que el forro plástico del cable también este dentro del conector aprox. 0.5 cms. y de que todos los hilos estén en el orden correcto de acuerdo a la norma.
-#figure(
-  image("media/foto6.jpg", width: 25%),
-  caption: [
-    Verificación visual
-  ],
-)
-
-=== Ponchado
-Utilice las pinzas para ponchado y apriete el conector con suficiente fuerza como para forzar los contactos a través del aislamiento en los hilos, completando así el camino conductor.
-#figure(
-  image("media/foto7.jpg", width: 25%),
-  caption: [
-    Ponchado
-  ],
-)
-
-=== Segundo extremo
-Repita los pasos 2 al 7 para construir el otro extremo del cable de conexión straight -through con la configuración T568-B.
-#figure(
-  image("media/foto8.jpg", width: 25%),
-  caption: [
-    Segundo extremo
-  ],
-)
-
-=== Cable cruzado
-Repita los pasos 2 al 9 para el otro tramo de cable UPT, pero ahora para la construcción de un cable de conexión crossover, utilizando la configuración T568-B en un extremo y para el otro la configuración T568-A.
-#figure(
-  image("media/foto9.jpg", width: 25%),
-  caption: [
-    Cable cruzado
-  ],
-)
-
-=== Prueba con analizador
-Finalmente pruebe los cables terminados empleando el analizador de continuidad ethernet.
-#figure(
-  image("media/foto10.jpg", width: 25%),
-  caption: [
-    Prueba con analizador
-  ],
-)
-#figure(
-  image("media/foto13.jpg", width: 25%),
-  caption: [
-    Prueba con analizador
-  ],
-)
-
-=== Evidencia fotográfica
-Incorpore una fotografía de los integrantes del equipo para evidencia que se presentaron a la práctica.
-#figure(
-  image("media/foto11.jpg", width: 25%),
-  caption: [
-    Evidencia fotográfica
-  ],
-)
-
-Realice la práctica y documente para cada pregunta o ejercicio con fotos y capturas de pantallas para todos los puntos e incisos.
-
-De los puntos 4 al 7 y en todos los incisos, deberá incorporarse un esquema, diagrama o ilustración referente a lo que se pregunta.
-
-= Notas importantes
-- Deberán anotar por orden alfabético en la portada de esta práctica, los nombres correctos y completos de cada integrante.
-- Incorporar la fotografía de los integrantes del equipo. Identificándose en la foto con su nombre.
-- *No se tomará en cuenta para la calificación de la práctica, aquellos integrantes que no aparezcan sus nombres en la portada. Una vez entregada la práctica, si se cometió un error u omisión ya no es posible corregirlo.*
-- La práctica se elaborará y se entregará en equipo.
-- Para validar esta práctica todos los alumnos deberán realizarla en tiempo real, durante la clase. (quien no la realice no será sujeto a evaluación).
-- El archivo se nombrará con la siguiente nomenclatura: `Practica1_5CV50_equipo#` Donde \# es el número de equipo.
-- La práctica será enviada al _Drive_ @drive_folder después de que termine la clase, el archivo fuente @github_repo y PDF.
-- Se debe crear una Carpeta nombrada con el numero de su equipo ejemplo “Equipo 1”.
-- La entrega de la practica es solo durante el tiempo de clase.
-- Si no se cumple con algún requisito u observaciones antes señaladas, afectará en la calificación en la práctica.
-
-#bibliography("media/bibliografia.bib", style: "apa")
