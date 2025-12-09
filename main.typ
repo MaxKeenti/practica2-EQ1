@@ -156,15 +156,15 @@ En cables crossover:
   caption: [Diagrama explicativo],
 )
 
-== 1. Conecta el cable crossover
+=== Conecta el cable crossover
 Cada extremo va conectado al adaptador de red Ethernet de cada computadora.
 
 #figure(
-  image("media/foto5.jpg", width: 40%),
+  image("media/foto1.jpg", width: 40%),
   caption: [Conexión del cable],
 )
 
-== 2. Asigna direcciones IP en la misma red
+=== Asigna direcciones IP en la misma red
 Como no hay router, cada PC debe tener una IP manual.
 
 Ejemplo:
@@ -179,12 +179,115 @@ Ejemplo:
 
 No se asigna puerta de enlace porque no hay salida a internet.
 
-== 3. Verifica conectividad
+=== Verifica conectividad
 En cada PC ejecuta con el comando ping.
 
 #figure(
-  image("media/foto10.jpg", width: 40%),
+  image("media/foto10.png", width: 40%),
   caption: [Verificación con Ping],
+)
+
+= Desarrollo de la práctica
+Desarrollo de la práctica:
+
+=== Identificación
+Identifique las conexiones del router, y explíquelas:
+
+Un router normalmente tiene:
+- Puerto WAN / Internet: se conecta al módem o a la red externa.
+- Puertos LAN (1–4): sirven para conectar computadoras con cables straight through.
+- Conector de energía: alimenta al router.
+- Botón Reset: restablece la configuración de fábrica.
+- (Opcional) WiFi: antenas para comunicación inalámbrica.
+
+#figure(
+  image("media/foto2.jpg", width: 40%),
+  caption: [Puertos del router parte trasera],
+)
+#figure(
+  image("media/foto3.jpg", width: 40%),
+  caption: [Indicadores del router],
+)
+
+== Conexión
+Conectar los equipos al router:
+- Cada equipo se conecta a un puerto LAN con un cable UTP straight-through.
+- El router les da dirección IP automáticamente (si DHCP está activado).
+Para comprobarlo se usa:
+Ipconfig
+
+#figure(
+  image("media/foto4.jpg", width: 40%),
+  caption: [Equipos conectados al router],
+)
+#figure(
+  image("media/foto6.jpg", width: 40%),
+  caption: [Equipos detectados por el router],
+)
+
+== Comprobación
+Aplicar y comprobar los comandos MS-DOS
+Ya con la red funcionando, ejecuta en cada PC:
+- ipconfig
+  - Para ver la IP asignada.
+- ping al router (ej. 192.168.1.1).
+  - Para verificar conexión.
+- tracert a algún dominio.
+  - Para ver la ruta de salida.
+- netstat
+  - Para ver conexiones activas.
+Esto comprueba que la PC está bien conectada al router.
+
+#figure(
+  image("media/foto7.jpg", width: 40%),
+  caption: [ipconfig],
+)
+#figure(
+  image("media/foto12.jpg", width: 40%),
+  caption: [ping],
+)
+#figure(
+  image("media/foto13.png", width: 40%),
+  caption: [tracert],
+)
+#figure(
+  image("media/foto14.png", width: 40%),
+  caption: [netstat],
+)
+
+== Crossover
+Realice una red punto a punto entre los dos equipos de cómputo con el cable cruzado. Asigne direccionamiento IP dentro del mismo segmento y rango de direccionamiento entre computadoras.
+
+#figure(
+  image("media/foto11.png", width: 40%),
+  caption: [Equipo 1 configuración],
+)
+#figure(
+  image("media/foto15.png", width: 40%),
+  caption: [Equipo 2 configuración],
+)
+
+== Comprobación
+Compruebe los comandos MS-DOS que se investigaron.
+#figure(
+  image("media/foto12.jpg", width: 40%),
+  caption: [ping Equipo 1],
+)
+#figure(
+  image("media/foto10.png", width: 40%),
+  caption: [ping Equipo 2],
+)
+
+= Conclusiones
+La realización de esta práctica ha permitido consolidar el conocimiento sobre los comandos fundamentales de red como `ping`, `ipconfig`, `tracert` y `netstat`. Se ha demostrado su utilidad para diagnosticar problemas de conectividad, obtener información detallada de la configuración de red, rastrear rutas de paquetes y monitorear conexiones activas.
+
+Asimismo, se ha comprendido la importancia del cableado estructurado al configurar una conexión punto a punto utilizando un cable crossover, destacando la necesidad de asignar direcciones IP estáticas en el mismo segmento de red. La experiencia con la conexión a un router ha reforzado el entendimiento del funcionamiento de DHCP y la interconexión de dispositivos en una red de área local.
+
+En resumen, esta práctica ha proporcionado una base sólida para la comprobación lógica de cableado y la conectividad de redes, equipando con herramientas esenciales para la administración y resolución de problemas en entornos de red.
+
+#figure(
+  image("media/foto16.jpg", width: 40%),
+  caption: [Equipo 8],
 )
 
 #bibliography("media/bibliografia.bib", style: "apa")
