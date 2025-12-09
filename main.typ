@@ -52,7 +52,7 @@
 
 = Comandos de Red
 
-== PING
+== PING @ping_ms
 El comando ping (Packet Internet Groper) permite comprobar si existe conectividad entre tu computadora y otro dispositivo dentro de la red o en Internet.
 
 Funciona enviando pequeños paquetes llamados ICMP Echo Request, y si el destino está disponible, este responde con ICMP Echo Reply.
@@ -72,7 +72,7 @@ En sistemas basados en UNIX como macOS y Linux, el comando es el mismo (`ping`),
 - Por defecto, se ejecuta indefinidamente (equivalente a `ping -t`). Se detiene con `Ctrl + C`.
 - `ping -c <n>`: Envía un número específico de paquetes (equivalente a `ping -n` de Windows).
 
-== IPCONFIG
+== IPCONFIG @ipconfig_ms
 El comando ipconfig muestra la información de configuración de red de la computadora en Windows y permite conocer direcciones IP asignadas, máscaras de subred, gateway, DNS, tipo de adaptador, entre otros datos fundamentales.
 
 Sirve para:
@@ -94,7 +94,7 @@ En macOS y Linux, el comando equivalente principal es `ifconfig`:
 - `ifconfig en0`: Muestra detalles de la interfaz específica (comúnmente WiFi en Mac).
 - `ipconfig getifaddr en0`: Comando específico de macOS para obtener rápidamente solo la dirección IP.
 
-== TRACERT
+== TRACERT @tracert_ms
 El comando tracert (Trace Route) permite rastrear la ruta que siguen los paquetes desde tu computadora hasta un destino.
 
 Muestra todos los routers o saltos por los que pasan los paquetes antes de llegar al final.
@@ -118,7 +118,7 @@ El comando equivalente es `traceroute`.
 - Funciona de manera similar, mostrando los saltos hasta el destino.
 - `traceroute google.com`
 
-== NETSTAT
+== NETSTAT @netstat_ms
 El comando netstat (Network Statistics) muestra todas las conexiones de red activas, los puertos en uso y estadísticas del protocolo TCP/IP.
 
 Ayuda a:
@@ -145,11 +145,11 @@ El comando `netstat` existe, pero algunas banderas difieren y es común usar otr
 
 ¿Cómo conectar 2 computadoras punto a punto con un cable crossover?
 
-Se utiliza un cable crossover porque las computadoras transmiten datos en un par y reciben en otro. Al cruzarlos, las señales de una PC llegan al puerto correcto de la otra PC.
+Se utiliza un cable crossover porque las computadoras transmiten datos en un par y reciben en otro. Al cruzarlos, las señales de una PC llegan al puerto correcto de la otra PC @tia_standard.
 
 En cables crossover:
 - El par que transmite en una PC llega al par receptor de la otra.
-- Esto permite la comunicación directa.
+- Esto permite la comunicación directa @flukenetworks_568.
 
 #figure(
   image("media/diagrama1.jpg", width: 50%),
@@ -186,3 +186,5 @@ En cada PC ejecuta con el comando ping.
   image("media/foto10.jpg", width: 40%),
   caption: [Verificación con Ping],
 )
+
+#bibliography("media/bibliografia.bib", style: "apa")
