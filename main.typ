@@ -62,10 +62,15 @@ Sirve para:
 - Identificar fallas en la red (si no hay respuesta, puede haber un problema físico o lógico).
 - Medir el tiempo de ida y vuelta de los paquetes (latencia), lo cual ayuda a detectar lentitud y saber si el problema es local (LAN) o externo (Internet).
 
-=== Ejemplos:
+=== Ejemplos (Windows):
 - `ping -t`: hace ping continuo.
 - `ping -4`: fuerza uso de IPv4.
 - `ping -n 10`: envía un número específico de paquetes.
+
+=== MacOS / UNIX
+En sistemas basados en UNIX como macOS y Linux, el comando es el mismo (`ping`), pero tiene diferencias en sus banderas:
+- Por defecto, se ejecuta indefinidamente (equivalente a `ping -t`). Se detiene con `Ctrl + C`.
+- `ping -c <n>`: Envía un número específico de paquetes (equivalente a `ping -n` de Windows).
 
 == IPCONFIG
 El comando ipconfig muestra la información de configuración de red de la computadora en Windows y permite conocer direcciones IP asignadas, máscaras de subred, gateway, DNS, tipo de adaptador, entre otros datos fundamentales.
@@ -76,12 +81,18 @@ Sirve para:
 - Saber si la PC recibió una IP del router mediante DHCP.
 - Diagnosticar problemas cuando la IP comienza con 169.254.x.x (red APIPA) y renovar o liberar la IP cuando hay conflictos de direccionamiento.
 
-=== Ejemplos
+=== Ejemplos (Windows)
 - `ipconfig`: muestra IP básica.
 - `ipconfig /all`: muestra toda la información detallada (DNS, MAC, DHCP).
 - `ipconfig /reléase`: libera la IP actual.
 - `ipconfig /renew`: solicita una nueva IP al servidor DHCP.
 - `ipconfig /flushdns`: limpia la caché DNS.
+
+=== MacOS / UNIX: IFCONFIG
+En macOS y Linux, el comando equivalente principal es `ifconfig`:
+- `ifconfig`: Muestra el estado de las interfaces de red activas.
+- `ifconfig en0`: Muestra detalles de la interfaz específica (comúnmente WiFi en Mac).
+- `ipconfig getifaddr en0`: Comando específico de macOS para obtener rápidamente solo la dirección IP.
 
 == TRACERT
 El comando tracert (Trace Route) permite rastrear la ruta que siguen los paquetes desde tu computadora hasta un destino.
@@ -102,6 +113,11 @@ tracert envía paquetes con un valor llamado TTL (Time to Live):
 
 Cada router responde indicando que pasó por ahí. Eso permite ver toda la ruta.
 
+=== MacOS / UNIX: TRACEROUTE
+El comando equivalente es `traceroute`.
+- Funciona de manera similar, mostrando los saltos hasta el destino.
+- `traceroute google.com`
+
 == NETSTAT
 El comando netstat (Network Statistics) muestra todas las conexiones de red activas, los puertos en uso y estadísticas del protocolo TCP/IP.
 
@@ -112,12 +128,18 @@ Ayuda a:
 - Detectar conexiones sospechosas o actividad anormal.
 - Consultar el estado de cada conexión (LISTENING, ESTABLISHED, TIME_WAIT, etc.).
 
-=== Ejemplos
+=== Ejemplos (Windows)
 - `netstat`: muestra conexiones activas.
 - `netstat -n`: muestra IPs y puertos en formato numérico.
 - `netstat -a`: muestra todos los puertos en escucha.
 - `netstat -b`: muestra qué programa usa qué conexión (requiere permisos).
 - `netstat -r`:  muestra la tabla de enrutamiento.
+
+=== MacOS / UNIX
+El comando `netstat` existe, pero algunas banderas difieren y es común usar otras herramientas:
+- `netstat -r`: Muestra tablas de enrutamiento (igual que en Windows).
+- `netstat -an`: Muestra conexiones y puertos en formato numérico.
+- `lsof -i`: ("List Open Files") Es una herramienta muy potente en UNIX para listar archivos de red abiertos y puertos en uso.
 
 = Conexión Punto a Punto con Cable Crossover
 
