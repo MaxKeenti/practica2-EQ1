@@ -263,7 +263,7 @@ Realice una red punto a punto entre los dos equipos de cómputo con el cable cru
   caption: [Equipo 1 configuración],
 )
 #figure(
-  image("media/foto15.png", width: 40%),
+  image("media/foto15.jpg", width: 40%),
   caption: [Equipo 2 configuración],
 )
 
