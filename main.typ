@@ -47,7 +47,7 @@
 #v(1cm)
 
 #set align(center)
-#title("Comprobación Lógica de Cableado y Conectividad de una Red de Área Local")
+#title("COMPROBACIÓN LÓGICA DE CABLEADO Y CONECTIVIDAD DE UNA RED DE ÁREA LOCAL")
 #set align(left)
 
 = Comandos de Red
